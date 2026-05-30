@@ -25,7 +25,7 @@ A highly immersive, cinematic WebGL portfolio built for **Shiv Prakash Singh**, 
 
 1. Clone the repository:
    ```bash
-   git clone [https://github.com/yourusername/holocron-portfolio.git](https://github.com/yourusername/holocron-portfolio.git)
+   git clone [https://github.com/ShivSingh-17/HoloCron.AI-PortFolio](https://github.com/yourusername/HoloCron.AI-PortFolio.git)
    ```
 
 2. Install dependencies:
