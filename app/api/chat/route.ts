@@ -14,15 +14,14 @@ export async function POST(req: Request) {
   try {
     console.log("--- CHATBOT API CALL INITIATED ---");
     console.log("GEMINI_API_KEY exists:", !!process.env.GEMINI_API_KEY);
-    console.log("GOOGLE_API_KEY exists:", !!process.env.GOOGLE_API_KEY);
 
     const { messages } = await req.json();
-    console.log("Received messages count:", messages?.length);
-    require('fs').writeFileSync('C:\\Users\\SHIV\\Desktop\\payload.json', JSON.stringify(messages, null, 2));
+
+    // Removed the problematic writeFileSync causing Vercel EROFS errors
 
     const coreMessages = (messages || []).map((msg: any) => {
       let textContent = "";
-      
+
       if (typeof msg.content === 'string') {
         textContent = msg.content;
       } else if (typeof msg.text === 'string') {
@@ -43,11 +42,13 @@ export async function POST(req: Request) {
     const path = require('path');
     const resumePath = path.join(process.cwd(), 'resume.md');
     let resumeContent = '';
-    
+
     try {
       resumeContent = fs.readFileSync(resumePath, 'utf8');
     } catch (e) {
       console.warn("Could not read resume.md, using fallback context");
+      // Vercel Fallback in case of path resolution issues during serverless execution
+      resumeContent = "Shiv Prakash Singh is an AI Engineer and Full-Stack Developer currently studying B.Tech CSE at Rungta College (2022-26) with a CGPA of 7.5. His projects include an Object Detection system using YOLOv8, an AI-Powered ATS, CAMai Safety System, and an AI-Based Code Generator. His tech stack includes Python, TypeScript, React, Next.js, LangChain, and YOLOv8. He has Certificates in "UDEMY: Data Analyst, Machine Learning, TensorFow" , "Cooding Spoon: Data Analyst Trainee", "Microsoft Learn: AI & ML basics", "Coursera: SQL for Data Science". He has Hobby like Football, Athletics, Competitive Gaming, Puzzle Solving. In Volunteer he worked as a Core-Member – Infinity eSports Club , Organizing Member – VYOM (Annual Fest)";
     }
 
     const result = await streamText({
@@ -59,9 +60,9 @@ export async function POST(req: Request) {
     return (result as any).toDataStreamResponse ? (result as any).toDataStreamResponse() : (result as any).toUIMessageStreamResponse();
   } catch (error: any) {
     console.error("Chatbot API Error:", error);
-    return new Response(JSON.stringify({ error: error.message || "Internal Server Error" }), { 
-      status: 500, 
-      headers: { 'Content-Type': 'application/json' } 
+    return new Response(JSON.stringify({ error: error.message || "Internal Server Error" }), {
+      status: 500,
+      headers: { 'Content-Type': 'application/json' }
     });
   }
 }
