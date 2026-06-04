@@ -48,7 +48,7 @@ export async function POST(req: Request) {
     } catch (e) {
       console.warn("Could not read resume.md, using fallback context");
       // Vercel Fallback in case of path resolution issues during serverless execution
-      resumeContent = "Shiv Prakash Singh is an AI Engineer and Full-Stack Developer currently studying B.Tech CSE at Rungta College (2022-26) with a CGPA of 7.5. His projects include an Object Detection system using YOLOv8, an AI-Powered ATS, CAMai Safety System, and an AI-Based Code Generator. His tech stack includes Python, TypeScript, React, Next.js, LangChain, and YOLOv8. He has Certificates in "UDEMY: Data Analyst, Machine Learning, TensorFow" , "Cooding Spoon: Data Analyst Trainee", "Microsoft Learn: AI & ML basics", "Coursera: SQL for Data Science". He has Hobby like Football, Athletics, Competitive Gaming, Puzzle Solving. In Volunteer he worked as a Core-Member – Infinity eSports Club , Organizing Member – VYOM (Annual Fest)";
+      resumeContent = "Shiv Prakash Singh is an AI Engineer and Full-Stack Developer currently studying B.Tech CSE at Rungta College (2022-26) with a CGPA of 7.5. His projects include an Object Detection system using YOLOv8, an AI-Powered ATS, CAMai Safety System, and an AI-Based Code Generator. His tech stack includes Python, TypeScript, React, Next.js, LangChain, and YOLOv8. He has Certificates in UDEMY: Data Analyst, Machine Learning, TensorFow, Cooding Spoon: Data Analyst Trainee, Microsoft Learn: AI & ML basics, Coursera: SQL for Data Science. He has Hobby like Football, Athletics, Competitive Gaming, Puzzle Solving. In Volunteer he worked as a Core-Member – Infinity eSports Club , Organizing Member – VYOM (Annual Fest)";
     }
 
     const result = await streamText({
